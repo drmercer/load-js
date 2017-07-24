@@ -51,6 +51,10 @@
 
     if (options.cache !== false && id) {
       cache[id] = pending;
+      // Clear cache if loading fails:
+      pending.catch(function() {
+         delete cache[id];
+      });
     }
 
     return pending;
